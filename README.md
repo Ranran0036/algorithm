@@ -4,4 +4,4 @@
 
     前端的算法水平也不能低。
 
-    ![图片](./fighting.jpg)
+    ![图片](https://github.com/LingsRanran/algorithm/blob/master/fighting.jpg)

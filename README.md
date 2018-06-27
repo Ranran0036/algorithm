@@ -4,4 +4,5 @@
 
     前端的算法水平也不能低。
 
-    ![图片](algorithm/fighting.jpg)
+
+![图片](algorithm/img/fighting.jpg)

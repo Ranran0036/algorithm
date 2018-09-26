@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p>你知道三位数CDE有几个吗？</p>
+    <p>若：ABx5=CDE</p>
+    <p>知：C+E=D</p>
+    <p>问:三位数CDE有几个？</p>
+</body>
+<script>
+    const toArr = (num) => {
+        let arr = [];
+
+        arr.push(parseInt(num/100));
+        arr.push(parseInt((num%100)/10));
+        arr.push(parseInt(num%10));
+
+        return arr;
+    }
+
+    const getNumber = () => {
+        let result = [];
+
+        //因为ABx5=CDE 故CDE小于500且能被5整除
+
+        for(let i = 100; i < 500 ; i += 5){
+            
+            arr = toArr(i);
+
+            //console.log(arr)
+
+            if(arr[0] + arr[2] === arr[1]){
+                result.push(i);
+            }
+        }
+
+        return result;
+
+    }
+
+    console.log(getNumber() , getNumber().length);
+
+
+
+</script>
+</html>

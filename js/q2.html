@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <img src="../img/q2.png" alt="question">
+</body>
+<script>
+    const toArr = (num) => {
+        let arr = [];
+
+        arr.push(parseInt(num/100));
+        arr.push(parseInt((num%100)/10));
+        arr.push(parseInt(num%10));
+
+        return arr;
+    }
+
+    const get1000 = () => {
+        let result = [];
+
+        for(i = 100 ; i < 1000 ; i++){
+            let other = 1000 - i;
+
+            let arr = toArr(i).concat(toArr(other));
+
+            if(!isRepeat(arr)){
+                result.push([i,other]);
+            }
+        }
+
+        return result;
+    }
+
+    function isRepeat(arr) {    
+        var hash = {};    
+        for (var i in arr) {        
+            if (hash[arr[i]]){            
+                return true;         
+            }        
+            hash[arr[i]] = true;    
+        }    
+        return false;
+    }
+
+    console.log(get1000())
+
+</script>
+</html>

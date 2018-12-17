@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>转换驼峰命名</title>
+</head>
+<body>
+    <p>完成 toCamelCaseVar 函数，它可以接受一个字符串作为参数，可以把类似于 is_good 这样的变量名替换成 isGood。</p>
+
+    <p>变量名首尾的下划线不需要做处理，中间的下划线全部删除并且处理成驼峰。</p>
+
+
+</body>
+<script>
+    const toCamelCaseVar = (str) => {
+        let flag1 = str.startsWith('_');//判断是否'_'开头
+        let flag2 = str.endsWith('_');//判断是否'_'结尾
+
+        if(flag1){
+            str = str.replace(/_/ , '');//删掉开头的'_'
+        }
+
+        if(flag2){
+            str = str.replace(/_$/ , '');//删掉末尾的'_'
+        }
+
+        let arr = str.split('_');
+
+        for(let i = 1;i<arr.length ; i++){
+            arr[i] = arr[i].substring(0,1).toUpperCase() + arr[i].substring(1);
+        }
+
+        let result = arr.join('');
+
+        if (flag1) {
+            result = result.padStart(result.length+1,'_');
+        }
+
+        if (flag1) {
+            result = result.padEnd(result.length+1,'_');
+        }
+
+        return result;
+    }
+
+    console.log(toCamelCaseVar('_aaa_bbb_ccc_ddd_'));
+
+    //const toCamelCaseVar = (variable) =>  variable.replace(/([^_])(?:_+(\S))/g, (_, f, p) => f + p.toUpperCase());
+</script>
+</html>

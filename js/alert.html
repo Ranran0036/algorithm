@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        body,html{
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        #bigBox{
+            width: 100%;
+            height: 100%;
+            background-color: rgb(175, 167, 167);
+            border-top: 1px solid rgb(175, 167, 167);
+            visibility: hidden;
+            z-index: 2;
+        }
+
+        #box{
+            opacity: 1;
+            background-color: white;
+            width: 480px;
+            height: 290px;
+            margin: 300px auto;
+            border-radius: 20px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .machine,.scan,.result{
+            text-align: left;
+        }
+
+        .warning{
+            color: red;
+            font-weight: bold;
+            font-size: 50px;
+        }
+
+        .btn{
+            width: 150px;
+            height: 50px;
+            background-color: rgb(44, 44, 216);
+            display: inline-block;
+            text-align: center;
+            cursor: pointer;
+            line-height: 50px;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            border-radius: 25px;
+            margin-top: 80px;
+        }
+
+        .btn:hover{
+            background-color: rgb(75, 75, 226);
+        }
+
+        .restart{
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 0;
+            z-index: 1;
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="bigBox">
+        <div id="box">
+            <p class="machine">机器条码: <span class="str1"></span></p>
+            <p class="scan">扫码条码: <span class="str2"></span></p>
+            <p class="result">结果：</p>
+            <p class="warning">不一致</p>
+            <span class="btn" onclick="hiddenEle()">Close</span>
+        </div>
+    </div>
+
+    <span class="btn restart" onclick="userPrompt()">Restart</span>
+
+
+    <script>
+        function userPrompt(){
+            let str1 = prompt('机器条码:');
+            let str2 = prompt('扫码条码:');
+
+            if(str1 == str2){
+                let r = confirm(`结果：两次输入一致`);
+                
+                if(r){
+                    userPrompt()
+                }
+            }else{
+                showEle(str1 , str2);
+            }
+
+            
+        }
+
+        function hiddenEle(){
+            let oBox = document.getElementById('bigBox');
+            let restartBtn = document.getElementsByClassName('restart')[0];
+
+            oBox.style.visibility = 'hidden';
+
+            restartBtn.style.visibility = 'visible'
+        }
+
+        function showEle(str1 , str2){
+            let oBox = document.getElementById('bigBox');
+            let restartBtn = document.getElementsByClassName('restart')[0];
+            let oStr1 = document.getElementsByClassName('str1')[0];
+            let oStr2 = document.getElementsByClassName('str2')[0];
+
+            oStr1.innerHTML = str1;
+            oStr2.innerHTML = str2;
+
+            oBox.style.visibility = 'visible';
+            restartBtn.style.visibility = 'hidden'
+        }
+
+        window.onload = function(){
+            userPrompt();
+        }
+    </script>
+
+    
+</body>
+</html>

@@ -60,10 +60,10 @@
             left: 492px;
         }
 
-        div#btn{
+        div.btn{
             width: 100px;
             height: 50px;
-            margin: 0 auto;
+            margin: 10px auto;
             background-color: coral;
             cursor: pointer;
             text-align: center;
@@ -87,19 +87,7 @@
         <em class="line line_3"></em>
         <em class="line line_4"></em>
     </div>
-    <div id="btn">SOLVE</div>
-    <script>
-        document.onload = function(){
-            let oBtn = document.getElementById('btn');
-            let oQue = document.getElementById('question');
-
-            oBtn.onclick = function(){
-                let inputArr = [];
-
-                
-            }
-        }
-    </script>
+    <div id="btn" class="btn">SOLVE</div><div id="refresh" class="btn">REFRESH</div>
 </body>
 <script>
 const solveSudoku = (board) => {
@@ -161,19 +149,45 @@ const solveSudoku = (board) => {
   return board;
 };
 
+window.onload = function(){
+    let oBtn = document.getElementById('btn');
+    let oFresh = document.getElementById('refresh');
+    let oQue = document.getElementById('question');
 
-let sudokuArr = [
-    [',','4','6','9',',','3',',',',',','],
-    [',',',','3',',','5',',',',','6',','],
-    ['9',',',',',',',',','2',',',',','3'],
-    [',',',','5',',',',','6',',',',',','],
-    ['8',',',',',',',',',',',',','1',','],
-    [',','1',',','7','8',',','2',',',','],
-    [',',',',',',',',',',',',',','5',','],
-    [',','8','1','3',',',',',',',',','7'],
-    [',',',',',','8',',',',','1',',','4']
-];
-let ans = solveSudoku(sudokuArr);
-console.log(sudokuArr,ans)
+    oFresh.onclick = function(){
+        location.reload();
+    }
+
+    oBtn.onclick = function(){
+        let inputArr = [];
+
+        for(let i=1;i<=9;i++){
+            let rowArr = [];
+
+            let oRow = document.getElementsByClassName(`row_${i}`)[0];
+
+            oRow.childNodes.forEach((item) => {
+                rowArr.push(item.value=='' ? ',' : item.value);
+            })
+
+            inputArr.push(rowArr);
+        }
+        
+        let result = solveSudoku(inputArr);
+
+        for(let i=0;i<9;i++){
+
+            let oRow = document.getElementsByClassName(`row_${i+1}`)[0];
+
+            oRow.childNodes.forEach((item , index) => {
+                if(item.value != result[i][index]){
+                    item.value = result[i][index];
+                    item.style.color = 'red';
+                }
+            })
+
+        }
+    }
+}
 </script>
 </html>

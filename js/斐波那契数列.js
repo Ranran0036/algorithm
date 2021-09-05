@@ -1,0 +1,21 @@
+/**
+ * @param {number} n
+ * @return {number}
+ */
+let fib = function(n) {
+    const MOD = 1000000007;
+
+    if(n < 2){
+        return n;
+    }
+
+    let p = 0, q = 0 , sum = 1;
+
+    for(let i = 2; i <= n; i++){
+        p = q;
+        q = sum;
+        sum = (p + q)%MOD;
+    }
+
+    return sum;
+};
